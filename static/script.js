@@ -56,6 +56,7 @@ button.style.color = "white"
 const getMessages = async () => {
     const ul = document.getElementById("messages")
     const isAtBottom = ul.scrollTop + ul.clientHeight >= ul.scrollHeight - 5
+
     const response = await fetch("/api/messages")
     const messages = await response.json()
 
@@ -64,17 +65,47 @@ const getMessages = async () => {
     for(let i = 0; i < messages.length; i++){
         const message = messages[i]
         const li = document.createElement('li')
+
         const text = message.text
+
         const isImage = text.match(/\.(jpeg|jpg|gif|png|webp)$/i)
+
+        const isLink = text.startsWith("http")
 
         let content = `<strong>${message.user}:</strong> ${text}`
 
         if (isImage) {
-            content += `<br><img src="${text}" style="max-width:200px; border-radius:10px; margin-top:5px;">`
+            content += `
+                <br>
+                <img src="${text}" style="
+                    max-width:200px;
+                    border-radius:10px;
+                    margin-top:5px;
+                ">
+            `
+        }
+
+        else if (isLink) {
+            content += `
+                <div style="
+                    margin-top:8px;
+                    padding:10px;
+                    border-radius:10px;
+                    background:#1e293b;
+                    border-left:4px solid #22c55e;
+                ">
+                    <a href="${text}" target="_blank" style="
+                        color:#22c55e;
+                        text-decoration:none;
+                        font-weight:bold;
+                    ">
+                        Abrir enlace
+                    </a>
+                </div>
+            `
         }
 
         li.innerHTML = content
-
         ul.append(li)
     }
 
