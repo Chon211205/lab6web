@@ -1,3 +1,35 @@
+// Por colocar el campo de texto para escribir el mensaje en la parte inferior de la pantalla (no debe ocultarse cuando hay muchos mensajes)
+document.body.style.margin = "0"
+document.body.style.display = "flex"
+document.body.style.flexDirection = "column"
+document.body.style.height = "100vh"
+
+const ul = document.getElementById("messages")
+ul.style.flex = "1"
+ul.style.overflowY = "auto"
+ul.style.listStyle = "none"
+ul.style.padding = "10px"
+
+const footer = document.querySelector("footer")
+footer.style.display = "flex"
+footer.style.padding = "10px"
+footer.style.background = "#222"
+footer.style.position = "sticky"
+footer.style.bottom = "0"
+
+const textarea = document.getElementById("message")
+textarea.style.flex = "1"
+textarea.style.padding = "10px"
+textarea.style.borderRadius = "10px"
+
+const button = document.getElementById("send")
+button.style.marginLeft = "10px"
+button.style.padding = "10px"
+button.style.borderRadius = "10px"
+button.style.background = "#22c55e"
+button.style.color = "white"
+
+//Por agregar hacer "submit" del mensaje utilizando "Enter" 
 const getMessages = async () =>{
     const response = await fetch("/api/messages")
     const messages = await response.json()
