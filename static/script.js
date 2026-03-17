@@ -18,9 +18,31 @@ footer.style.position = "sticky"
 footer.style.bottom = "0"
 
 const textarea = document.getElementById("message")
+
+//contador en vivo de 140 maximo.
+const counter = document.createElement("div")
+counter.textContent = "0/140"
+counter.style.color = "white"
+counter.style.fontSize = "12px"
+counter.style.marginBottom = "5px"
+
+footer.insertBefore(counter, textarea)
+
+textarea.addEventListener("input", () => {
+    const length = textarea.value.length
+    counter.textContent = `${length}/140`
+
+    if(length > 120){
+        counter.style.color = "orange"
+    } else {
+        counter.style.color = "white"
+    }
+})
+
 textarea.style.flex = "1"
 textarea.style.padding = "10px"
 textarea.style.borderRadius = "10px"
+
 
 const button = document.getElementById("send")
 button.style.marginLeft = "10px"
@@ -62,18 +84,25 @@ const postMessages = async (message) =>{
     getMessages()
 }
 
+//contador en vivo de 140 maximo.
 function sendMessage(){
     const textarea = document.getElementById('message')
     const text = textarea.value.trim()
 
     if(!text) return
 
+    if(text.length > 140){
+        alert("Máximo 140 caracteres")
+        return
+    }
+
     postMessages({
         user: 'chon',
         text: text
     })
 
-    textarea.value = "" 
+    textarea.value = ""
+    counter.textContent = "0/140"
 }
 
 document.getElementById('send').addEventListener('click', sendMessage)
@@ -86,4 +115,5 @@ document.getElementById('message').addEventListener('keydown', (e) => {
 })
 
 getMessages()
+//Auto-refresh de la lista de mensajes
 setInterval(getMessages, 2000)
