@@ -30,19 +30,24 @@ button.style.background = "#22c55e"
 button.style.color = "white"
 
 //Por agregar hacer "submit" del mensaje utilizando "Enter" 
-const getMessages = async () =>{
+//Por preservar el scroll después de recibir nuevos mensajes
+const getMessages = async () => {
+    const ul = document.getElementById("messages")
+    const isAtBottom = ul.scrollTop + ul.clientHeight >= ul.scrollHeight - 5
     const response = await fetch("/api/messages")
     const messages = await response.json()
-    console.log("messages",messages)
 
-    const ul= document.getElementById("messages")
-    ul.innerHTML=''
+    ul.innerHTML = ''
 
-    for(let i =0; i<messages.length;i++){
+    for(let i = 0; i < messages.length; i++){
         const message = messages[i]
-        const li =document.createElement('li')
-        li.innerHTML=`<strong>${message.user}:</strong> ${message.text}`
+        const li = document.createElement('li')
+        li.innerHTML = `<strong>${message.user}:</strong> ${message.text}`
         ul.append(li)
+    }
+
+    if (isAtBottom) {
+        ul.scrollTop = ul.scrollHeight
     }
 }
 
@@ -68,7 +73,7 @@ function sendMessage(){
         text: text
     })
 
-    textarea.value = "" // limpiar input
+    textarea.value = "" 
 }
 
 document.getElementById('send').addEventListener('click', sendMessage)
