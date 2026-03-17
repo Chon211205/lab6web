@@ -64,7 +64,17 @@ const getMessages = async () => {
     for(let i = 0; i < messages.length; i++){
         const message = messages[i]
         const li = document.createElement('li')
-        li.innerHTML = `<strong>${message.user}:</strong> ${message.text}`
+        const text = message.text
+        const isImage = text.match(/\.(jpeg|jpg|gif|png|webp)$/i)
+
+        let content = `<strong>${message.user}:</strong> ${text}`
+
+        if (isImage) {
+            content += `<br><img src="${text}" style="max-width:200px; border-radius:10px; margin-top:5px;">`
+        }
+
+        li.innerHTML = content
+
         ul.append(li)
     }
 
