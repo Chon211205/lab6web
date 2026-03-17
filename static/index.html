@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>GoChat</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+
+    <style>
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #049d79, #064e3b);
+            color: white;
+            font-family: Arial;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>CHAT!</h1>
-	<ul id="messages"></ul>
+    <h1><center>UVG CHAT 🐉</center></h1>
 
-	<footer>
-		<textarea name="message" id="message"></textarea>
-		<button id="send">SEND</button>
-	</footer>
-    <script src="script.js" type="module"> </script>
+    <ul id="messages"></ul>
+
+    <footer>
+        <textarea id="message"></textarea>
+        <button id="send">SEND</button>
+    </footer>
+
+    <script src="script.js" type="module"></script>
 </body>
-
 </html>

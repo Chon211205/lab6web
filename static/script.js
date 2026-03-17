@@ -1,4 +1,5 @@
 // Por colocar el campo de texto para escribir el mensaje en la parte inferior de la pantalla (no debe ocultarse cuando hay muchos mensajes)
+// [Criterio subjetivo] Según qué tan interesante es el diseño de su interfaz
 document.body.style.margin = "0"
 document.body.style.display = "flex"
 document.body.style.flexDirection = "column"
@@ -53,6 +54,8 @@ button.style.color = "white"
 
 //Por agregar hacer "submit" del mensaje utilizando "Enter" 
 //Por preservar el scroll después de recibir nuevos mensajes
+//Por detectar un link a una imagen dentro del texto y crear una preview en la lista de mensajes
+//Por detectar un link a una página web dentro del texto y crear una preview en la lista de mensajes
 const getMessages = async () => {
     const ul = document.getElementById("messages")
     const isAtBottom = ul.scrollTop + ul.clientHeight >= ul.scrollHeight - 5
