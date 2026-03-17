@@ -86,3 +86,4 @@ document.getElementById('message').addEventListener('keydown', (e) => {
 })
 
 getMessages()
+setInterval(getMessages, 2000)
